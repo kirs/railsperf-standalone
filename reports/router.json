@@ -1,0 +1,173 @@
+{
+  "ruby": "2.2.0",
+  "benchmarks": [
+    {
+      "component": "router",
+      "version": "3.2.21",
+      "entries": [
+        {
+          "label": "root route",
+          "iterations": 4532,
+          "ips": 923.3364967253746,
+          "ips_sd": 153
+        },
+        {
+          "label": "3rd level nested resource #index",
+          "iterations": 4416,
+          "ips": 892.8025024724752,
+          "ips_sd": 134
+        },
+        {
+          "label": "3rd level nested resource #show",
+          "iterations": 4032,
+          "ips": 819.6242188008779,
+          "ips_sd": 125
+        },
+        {
+          "label": "route with inline redirect",
+          "iterations": 7968,
+          "ips": 1613.6580129618653,
+          "ips_sd": 186
+        },
+        {
+          "label": "match with POST",
+          "iterations": 4830,
+          "ips": 1009.7075079500991,
+          "ips_sd": 192
+        },
+        {
+          "label": "match with GET",
+          "iterations": 3984,
+          "ips": 821.3227686481614,
+          "ips_sd": 139
+        }
+      ]
+    },
+    {
+      "component": "router",
+      "version": "4.0.13",
+      "entries": [
+        {
+          "label": "root route",
+          "iterations": 5642,
+          "ips": 1146.5664744633093,
+          "ips_sd": 160
+        },
+        {
+          "label": "3rd level nested resource #index",
+          "iterations": 4838,
+          "ips": 999.5534542839505,
+          "ips_sd": 175
+        },
+        {
+          "label": "3rd level nested resource #show",
+          "iterations": 4662,
+          "ips": 950.3334957079087,
+          "ips_sd": 149
+        },
+        {
+          "label": "route with inline redirect",
+          "iterations": 10672,
+          "ips": 2136.8781463804453,
+          "ips_sd": 165
+        },
+        {
+          "label": "match with POST",
+          "iterations": 7104,
+          "ips": 1407.0602701257862,
+          "ips_sd": 51
+        },
+        {
+          "label": "match with GET",
+          "iterations": 5300,
+          "ips": 1076.7630632148916,
+          "ips_sd": 151
+        }
+      ]
+    },
+    {
+      "component": "router",
+      "version": "4.1.9",
+      "entries": [
+        {
+          "label": "root route",
+          "iterations": 6027,
+          "ips": 1213.2658247022723,
+          "ips_sd": 111
+        },
+        {
+          "label": "3rd level nested resource #index",
+          "iterations": 5376,
+          "ips": 1063.785662467568,
+          "ips_sd": 90
+        },
+        {
+          "label": "3rd level nested resource #show",
+          "iterations": 4346,
+          "ips": 890.3686380922945,
+          "ips_sd": 139
+        },
+        {
+          "label": "route with inline redirect",
+          "iterations": 10094,
+          "ips": 2016.177670729751,
+          "ips_sd": 208
+        },
+        {
+          "label": "match with POST",
+          "iterations": 5876,
+          "ips": 1220.1143165922736,
+          "ips_sd": 226
+        },
+        {
+          "label": "match with GET",
+          "iterations": 4095,
+          "ips": 823.3109951123151,
+          "ips_sd": 115
+        }
+      ]
+    },
+    {
+      "component": "router",
+      "version": "4.2.0",
+      "entries": [
+        {
+          "label": "root route",
+          "iterations": 8050,
+          "ips": 1590.7390639155856,
+          "ips_sd": 86
+        },
+        {
+          "label": "3rd level nested resource #index",
+          "iterations": 6944,
+          "ips": 1403.4508023209398,
+          "ips_sd": 189
+        },
+        {
+          "label": "3rd level nested resource #show",
+          "iterations": 7000,
+          "ips": 1398.289849926755,
+          "ips_sd": 136
+        },
+        {
+          "label": "route with inline redirect",
+          "iterations": 14950,
+          "ips": 3021.2705194544847,
+          "ips_sd": 297
+        },
+        {
+          "label": "match with POST",
+          "iterations": 7398,
+          "ips": 1528.5914269165162,
+          "ips_sd": 250
+        },
+        {
+          "label": "match with GET",
+          "iterations": 6674,
+          "ips": 1347.4141854132445,
+          "ips_sd": 178
+        }
+      ]
+    }
+  ]
+}

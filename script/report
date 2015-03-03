@@ -1,0 +1,70 @@
+#!/usr/bin/env ruby
+
+require 'json'
+require 'pp'
+require 'active_support'
+require 'active_support/core_ext/object/blank'
+require "erb"
+
+reports = {}
+
+pattern = File.join("reports", "*.json")
+files = Dir.glob(pattern).sort_by { |f| File.mtime(f) }.reverse
+
+files.each { |path|
+  raw = File.open(path).read
+  reports[File.basename(path)] = JSON.parse(raw)
+}
+
+def format_reports(reports)
+  nodes = reports.map { |r| r["entries"].size }.max - 1
+  (0..nodes).map do |i|
+    [
+      reports.map { |r| r["entries"][i]["label"] }.find(&:present?),
+      reports.map { |r|
+        current = !!r["current"]
+        {
+          label: current ? "current" : r["version"],
+          ips: r["entries"][i]["ips"],
+          current: current
+        }
+      }
+    ]
+  end
+end
+
+rubies = []
+reports.each do |k, v|
+  rubies << v["ruby"]
+  reports[k] = format_reports(v["benchmarks"])
+end
+rubies.uniq!
+
+# build data class
+class Renderer
+  attr_reader :compiled
+
+  def initialize(rubies, data)
+    # @product = product
+    # @price = price
+    @compiled = nil
+    @benchmarks = data#[:benchmarks]
+    @rubies = rubies
+  end
+
+  def build
+    b = binding
+    # create and run templates, filling member data variables
+    ERB.new(File.open('web/template.erb').read, 0, "", "@compiled").result b
+  end
+end
+
+# setup template data
+listings = Renderer.new(rubies, reports)
+listings.build
+
+File.open('index.html', 'w') do |f|
+  f.write listings.compiled
+end
+
+`open index.html`

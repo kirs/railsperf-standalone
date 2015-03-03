@@ -1,0 +1,53 @@
+{
+  "ruby": "2.2.0",
+  "benchmarks": [
+    {
+      "component": "app",
+      "version": "3.2.21",
+      "entries": [
+        {
+          "label": "complex script with comments and posts",
+          "iterations": 1007,
+          "ips": 200.2052205218376,
+          "ips_sd": 11
+        }
+      ]
+    },
+    {
+      "component": "app",
+      "version": "4.0.13",
+      "entries": [
+        {
+          "label": "complex script with comments and posts",
+          "iterations": 954,
+          "ips": 191.02386480234412,
+          "ips_sd": 8
+        }
+      ]
+    },
+    {
+      "component": "app",
+      "version": "4.1.9",
+      "entries": [
+        {
+          "label": "complex script with comments and posts",
+          "iterations": 918,
+          "ips": 182.69483807778457,
+          "ips_sd": 9
+        }
+      ]
+    },
+    {
+      "component": "app",
+      "version": "4.2.0",
+      "entries": [
+        {
+          "label": "complex script with comments and posts",
+          "iterations": 952,
+          "ips": 190.24397765391626,
+          "ips_sd": 11
+        }
+      ]
+    }
+  ]
+}

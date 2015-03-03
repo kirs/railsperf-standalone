@@ -1,0 +1,53 @@
+{
+  "ruby": "2.2.0",
+  "benchmarks": [
+    {
+      "component": "actionview/render_partials",
+      "version": "3.2.21",
+      "entries": [
+        {
+          "label": "render nested partials",
+          "iterations": 15,
+          "ips": 1.4593465525947762,
+          "ips_sd": 0
+        }
+      ]
+    },
+    {
+      "component": "actionview/render_partials",
+      "version": "4.0.13",
+      "entries": [
+        {
+          "label": "render nested partials",
+          "iterations": 15,
+          "ips": 1.4556340673718573,
+          "ips_sd": 0
+        }
+      ]
+    },
+    {
+      "component": "actionview/render_partials",
+      "version": "4.1.9",
+      "entries": [
+        {
+          "label": "render nested partials",
+          "iterations": 16,
+          "ips": 1.5341589433838454,
+          "ips_sd": 0
+        }
+      ]
+    },
+    {
+      "component": "actionview/render_partials",
+      "version": "4.2.0",
+      "entries": [
+        {
+          "label": "render nested partials",
+          "iterations": 19,
+          "ips": 1.7990348100368851,
+          "ips_sd": 0
+        }
+      ]
+    }
+  ]
+}

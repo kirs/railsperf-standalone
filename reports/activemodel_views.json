@@ -1,0 +1,41 @@
+{
+  "ruby": "2.2.0",
+  "benchmarks": [
+    {
+      "component": "actionview/render_activemodels",
+      "version": "4.0.13",
+      "entries": [
+        {
+          "label": "render nested partials",
+          "iterations": 68,
+          "ips": 6.767343087950769,
+          "ips_sd": 0
+        }
+      ]
+    },
+    {
+      "component": "actionview/render_activemodels",
+      "version": "4.1.9",
+      "entries": [
+        {
+          "label": "render nested partials",
+          "iterations": 68,
+          "ips": 6.8010996823825085,
+          "ips_sd": 0
+        }
+      ]
+    },
+    {
+      "component": "actionview/render_activemodels",
+      "version": "4.2.0",
+      "entries": [
+        {
+          "label": "render nested partials",
+          "iterations": 78,
+          "ips": 7.725842916801819,
+          "ips_sd": 0
+        }
+      ]
+    }
+  ]
+}
