@@ -13,23 +13,21 @@
 $(function() {
   var chartData;
 
-  var benchmarksData = $(".js-benchmarks-data");
 
-  if(benchmarksData.length == 0) {
-    return;
-  }
-
-  chartData = JSON.parse(benchmarksData.html());
-
-  if(chartData == null) {
-    return;
-  }
 
   var chartsContainer = $(".js-charts-container");
+  if(chartsContainer.length == 0) {
+    return;
+  }
 
-  for (var key in chartData) {
-    chartsContainer.append("<h1>" + key + "</h1>")
-    for(var i=0; i < chartData[key].length; i++) {
+  chartsContainer.each(function(i, div) {
+    var benchmarksData = $(div).find(".js-benchmarks-data")
+    chartData = JSON.parse(benchmarksData.html());
+    if(chartData == null) {
+      return;
+    }
+
+    for(var i=0; i < chartData.length; i++) {
       var margin = {top: 20, right: 20, bottom: 30, left: 40},
           width = 220 - margin.left - margin.right,
           height = 200 - margin.top - margin.bottom;
@@ -59,11 +57,7 @@ $(function() {
         .append("g")
           .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        var data = chartData[key][i][1]
-
-        //   var data = [
-        // { label: "3.2.1", ips: 22328.71492},
-        // { label: "4.0.0", ips: 20328.22782}]
+      var data = chartData[i][1]
 
       x.domain(data.map(function(d) { return d.label; }));
       y.domain([0, d3.max(data, function(d) { return d.ips; })]);
@@ -103,13 +97,13 @@ $(function() {
           .append("svg:title")
            .text(function(d) { return labelFormatter(d.ips); });
 
-      var label = $("<div></div>").text(chartData[key][i][0])
+      var label = $("<div></div>").text(chartData[i][0])
       label.addClass("chart-label")
       node.append(label)
 
-      chartsContainer.append(node)
+      $(div).append(node)
     }
-  }
+  })
 })
 </script>
 
@@ -381,8 +375,13 @@ body,
   <div class="container">
     <div class="row"><h4>rubies: <%= @rubies.join(", ") %></h4></div>
     <div class="row">
-      <template class="js-benchmarks-data"><%= @benchmarks.to_json %></template>
-      <div class="charts-container js-charts-container"></div>
+      <% @benchmarks.each do |key, value| %>
+      <div class="js-charts-container">
+        <h1><a target="_blank" href="<%= link_to_benchmark(key) %>"><%= humanize(key) %></a></h1>
+        <template class="js-benchmarks-data"><%= value.to_json %></template>
+      </div>
+
+      <% end %>
     </div>
   </div>
 

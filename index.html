@@ -13,23 +13,21 @@
 $(function() {
   var chartData;
 
-  var benchmarksData = $(".js-benchmarks-data");
 
-  if(benchmarksData.length == 0) {
-    return;
-  }
-
-  chartData = JSON.parse(benchmarksData.html());
-
-  if(chartData == null) {
-    return;
-  }
 
   var chartsContainer = $(".js-charts-container");
+  if(chartsContainer.length == 0) {
+    return;
+  }
 
-  for (var key in chartData) {
-    chartsContainer.append("<h1>" + key + "</h1>")
-    for(var i=0; i < chartData[key].length; i++) {
+  chartsContainer.each(function(i, div) {
+    var benchmarksData = $(div).find(".js-benchmarks-data")
+    chartData = JSON.parse(benchmarksData.html());
+    if(chartData == null) {
+      return;
+    }
+
+    for(var i=0; i < chartData.length; i++) {
       var margin = {top: 20, right: 20, bottom: 30, left: 40},
           width = 220 - margin.left - margin.right,
           height = 200 - margin.top - margin.bottom;
@@ -59,11 +57,7 @@ $(function() {
         .append("g")
           .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        var data = chartData[key][i][1]
-
-        //   var data = [
-        // { label: "3.2.1", ips: 22328.71492},
-        // { label: "4.0.0", ips: 20328.22782}]
+      var data = chartData[i][1]
 
       x.domain(data.map(function(d) { return d.label; }));
       y.domain([0, d3.max(data, function(d) { return d.ips; })]);
@@ -103,13 +97,13 @@ $(function() {
           .append("svg:title")
            .text(function(d) { return labelFormatter(d.ips); });
 
-      var label = $("<div></div>").text(chartData[key][i][0])
+      var label = $("<div></div>").text(chartData[i][0])
       label.addClass("chart-label")
       node.append(label)
 
-      chartsContainer.append(node)
+      $(div).append(node)
     }
-  }
+  })
 })
 </script>
 
@@ -381,8 +375,43 @@ body,
   <div class="container">
     <div class="row"><h4>rubies: 2.2.0</h4></div>
     <div class="row">
-      <template class="js-benchmarks-data">{"app.json":[["app with comments and posts",[{"label":"4.0.13","ips":7.246500387196288,"current":false},{"label":"4.1.9","ips":6.380592464890243,"current":false},{"label":"4.2.0","ips":2.9545931370445566,"current":false}]]],"activemodel_views.json":[["render nested partials",[{"label":"4.0.13","ips":6.767343087950769,"current":false},{"label":"4.1.9","ips":6.8010996823825085,"current":false},{"label":"4.2.0","ips":7.725842916801819,"current":false}]]],"activerecord_app.json":[["complex script with comments and posts",[{"label":"3.2.21","ips":200.2052205218376,"current":false},{"label":"4.0.13","ips":191.02386480234412,"current":false},{"label":"4.1.9","ips":182.69483807778457,"current":false},{"label":"4.2.0","ips":190.24397765391626,"current":false}]]],"activerecord.json":[["Model.new (instantiation)",[{"label":"3.2.21","ips":60532.32537083031,"current":false},{"label":"4.0.13","ips":49830.20838576677,"current":false},{"label":"4.1.9","ips":46946.95906285355,"current":false},{"label":"4.2.0","ips":74187.17207067415,"current":false}]],["Model.new (setting attributes)",[{"label":"3.2.21","ips":23869.70331515139,"current":false},{"label":"4.0.13","ips":28833.401143065945,"current":false},{"label":"4.1.9","ips":24706.130852303635,"current":false},{"label":"4.2.0","ips":10490.564070606302,"current":false}]],["Model.first",[{"label":"3.2.21","ips":5739.666649627769,"current":false},{"label":"4.0.13","ips":5063.4196660236385,"current":false},{"label":"4.1.9","ips":4258.799102263737,"current":false},{"label":"4.2.0","ips":4491.08274108721,"current":false}]],["Model.all limit(100)",[{"label":"3.2.21","ips":88.09030745314995,"current":false},{"label":"4.0.13","ips":133.07430155812202,"current":false},{"label":"4.1.9","ips":124.80851699580177,"current":false},{"label":"4.2.0","ips":106.49271222745408,"current":false}]],["Model.all first(100)",[{"label":"3.2.21","ips":88.69647199046258,"current":false},{"label":"4.0.13","ips":131.27393736658126,"current":false},{"label":"4.1.9","ips":139.52828223321873,"current":false},{"label":"4.2.0","ips":104.72240257897202,"current":false}]],["Model.all limit(100) with relationship",[{"label":"3.2.21","ips":57.538936268459175,"current":false},{"label":"4.0.13","ips":75.39732461993457,"current":false},{"label":"4.1.9","ips":78.69038517824353,"current":false},{"label":"4.2.0","ips":57.86867177304489,"current":false}]],["Model.all limit(10,000)",[{"label":"3.2.21","ips":1.9977595131962438,"current":false},{"label":"4.0.13","ips":3.006435975442031,"current":false},{"label":"4.1.9","ips":3.2936536143412942,"current":false},{"label":"4.2.0","ips":4.851741896819316,"current":false}]],["Model.named_scope",[{"label":"3.2.21","ips":19154.960400460488,"current":false},{"label":"4.0.13","ips":16078.133419095977,"current":false},{"label":"4.1.9","ips":15892.788716122495,"current":false},{"label":"4.2.0","ips":16391.778294842494,"current":false}]],["Model.create",[{"label":"3.2.21","ips":2011.0733990166405,"current":false},{"label":"4.0.13","ips":1759.863318049373,"current":false},{"label":"4.1.9","ips":1423.8581580679038,"current":false},{"label":"4.2.0","ips":1048.4856554300995,"current":false}]],["Resource#update",[{"label":"3.2.21","ips":1402.9294600990052,"current":false},{"label":"4.0.13","ips":1058.3971427774252,"current":false},{"label":"4.1.9","ips":1245.9942457904845,"current":false},{"label":"4.2.0","ips":1019.3441819557407,"current":false}]],["Model.transaction",[{"label":"3.2.21","ips":11447.440690185947,"current":false},{"label":"4.0.13","ips":9787.559729963783,"current":false},{"label":"4.1.9","ips":9822.858203125877,"current":false},{"label":"4.2.0","ips":10245.322882410977,"current":false}]],["Model.find(id)",[{"label":"3.2.21","ips":5760.619862615137,"current":false},{"label":"4.0.13","ips":5120.093199206333,"current":false},{"label":"4.1.9","ips":4314.923864854827,"current":false},{"label":"4.2.0","ips":12468.429248151462,"current":false}]],["Model.find_by_sql",[{"label":"3.2.21","ips":11103.79830091216,"current":false},{"label":"4.0.13","ips":10304.376112010663,"current":false},{"label":"4.1.9","ips":10841.295311080357,"current":false},{"label":"4.2.0","ips":9806.543183340405,"current":false}]]],"app_blank.json":[["app with comments and posts",[{"label":"3.2.21","ips":110.05695337358299,"current":false},{"label":"4.0.13","ips":110.86343386092018,"current":false},{"label":"4.1.9","ips":114.04304686246664,"current":false},{"label":"4.2.0","ips":114.99439508538288,"current":false}]]],"router.json":[["root route",[{"label":"3.2.21","ips":923.3364967253746,"current":false},{"label":"4.0.13","ips":1146.5664744633093,"current":false},{"label":"4.1.9","ips":1213.2658247022723,"current":false},{"label":"4.2.0","ips":1590.7390639155856,"current":false}]],["3rd level nested resource #index",[{"label":"3.2.21","ips":892.8025024724752,"current":false},{"label":"4.0.13","ips":999.5534542839505,"current":false},{"label":"4.1.9","ips":1063.785662467568,"current":false},{"label":"4.2.0","ips":1403.4508023209398,"current":false}]],["3rd level nested resource #show",[{"label":"3.2.21","ips":819.6242188008779,"current":false},{"label":"4.0.13","ips":950.3334957079087,"current":false},{"label":"4.1.9","ips":890.3686380922945,"current":false},{"label":"4.2.0","ips":1398.289849926755,"current":false}]],["route with inline redirect",[{"label":"3.2.21","ips":1613.6580129618653,"current":false},{"label":"4.0.13","ips":2136.8781463804453,"current":false},{"label":"4.1.9","ips":2016.177670729751,"current":false},{"label":"4.2.0","ips":3021.2705194544847,"current":false}]],["match with POST",[{"label":"3.2.21","ips":1009.7075079500991,"current":false},{"label":"4.0.13","ips":1407.0602701257862,"current":false},{"label":"4.1.9","ips":1220.1143165922736,"current":false},{"label":"4.2.0","ips":1528.5914269165162,"current":false}]],["match with GET",[{"label":"3.2.21","ips":821.3227686481614,"current":false},{"label":"4.0.13","ips":1076.7630632148916,"current":false},{"label":"4.1.9","ips":823.3109951123151,"current":false},{"label":"4.2.0","ips":1347.4141854132445,"current":false}]]],"partials.json":[["render nested partials",[{"label":"3.2.21","ips":1.4593465525947762,"current":false},{"label":"4.0.13","ips":1.4556340673718573,"current":false},{"label":"4.1.9","ips":1.5341589433838454,"current":false},{"label":"4.2.0","ips":1.7990348100368851,"current":false}]]]}</template>
-      <div class="charts-container js-charts-container"></div>
+      
+      <div class="js-charts-container">
+        <h1><a target="_blank" href="https://github.com/kirs/railsperf-standalone/blob/master/benchmarks/app.rb">app</a></h1>
+        <template class="js-benchmarks-data">[["app with comments and posts",[{"label":"4.0.13","ips":7.246500387196288,"current":false},{"label":"4.1.9","ips":6.380592464890243,"current":false},{"label":"4.2.0","ips":2.9545931370445566,"current":false}]]]</template>
+      </div>
+
+      
+      <div class="js-charts-container">
+        <h1><a target="_blank" href="https://github.com/kirs/railsperf-standalone/blob/master/benchmarks/activemodel_views.rb">activemodel_views</a></h1>
+        <template class="js-benchmarks-data">[["render nested partials",[{"label":"4.0.13","ips":6.767343087950769,"current":false},{"label":"4.1.9","ips":6.8010996823825085,"current":false},{"label":"4.2.0","ips":7.725842916801819,"current":false}]]]</template>
+      </div>
+
+      
+      <div class="js-charts-container">
+        <h1><a target="_blank" href="https://github.com/kirs/railsperf-standalone/blob/master/benchmarks/activerecord_app.rb">activerecord_app</a></h1>
+        <template class="js-benchmarks-data">[["complex script with comments and posts",[{"label":"3.2.21","ips":200.2052205218376,"current":false},{"label":"4.0.13","ips":191.02386480234412,"current":false},{"label":"4.1.9","ips":182.69483807778457,"current":false},{"label":"4.2.0","ips":190.24397765391626,"current":false}]]]</template>
+      </div>
+
+      
+      <div class="js-charts-container">
+        <h1><a target="_blank" href="https://github.com/kirs/railsperf-standalone/blob/master/benchmarks/activerecord.rb">activerecord</a></h1>
+        <template class="js-benchmarks-data">[["Model.new (instantiation)",[{"label":"3.2.21","ips":60532.32537083031,"current":false},{"label":"4.0.13","ips":49830.20838576677,"current":false},{"label":"4.1.9","ips":46946.95906285355,"current":false},{"label":"4.2.0","ips":74187.17207067415,"current":false}]],["Model.new (setting attributes)",[{"label":"3.2.21","ips":23869.70331515139,"current":false},{"label":"4.0.13","ips":28833.401143065945,"current":false},{"label":"4.1.9","ips":24706.130852303635,"current":false},{"label":"4.2.0","ips":10490.564070606302,"current":false}]],["Model.first",[{"label":"3.2.21","ips":5739.666649627769,"current":false},{"label":"4.0.13","ips":5063.4196660236385,"current":false},{"label":"4.1.9","ips":4258.799102263737,"current":false},{"label":"4.2.0","ips":4491.08274108721,"current":false}]],["Model.all limit(100)",[{"label":"3.2.21","ips":88.09030745314995,"current":false},{"label":"4.0.13","ips":133.07430155812202,"current":false},{"label":"4.1.9","ips":124.80851699580177,"current":false},{"label":"4.2.0","ips":106.49271222745408,"current":false}]],["Model.all first(100)",[{"label":"3.2.21","ips":88.69647199046258,"current":false},{"label":"4.0.13","ips":131.27393736658126,"current":false},{"label":"4.1.9","ips":139.52828223321873,"current":false},{"label":"4.2.0","ips":104.72240257897202,"current":false}]],["Model.all limit(100) with relationship",[{"label":"3.2.21","ips":57.538936268459175,"current":false},{"label":"4.0.13","ips":75.39732461993457,"current":false},{"label":"4.1.9","ips":78.69038517824353,"current":false},{"label":"4.2.0","ips":57.86867177304489,"current":false}]],["Model.all limit(10,000)",[{"label":"3.2.21","ips":1.9977595131962438,"current":false},{"label":"4.0.13","ips":3.006435975442031,"current":false},{"label":"4.1.9","ips":3.2936536143412942,"current":false},{"label":"4.2.0","ips":4.851741896819316,"current":false}]],["Model.named_scope",[{"label":"3.2.21","ips":19154.960400460488,"current":false},{"label":"4.0.13","ips":16078.133419095977,"current":false},{"label":"4.1.9","ips":15892.788716122495,"current":false},{"label":"4.2.0","ips":16391.778294842494,"current":false}]],["Model.create",[{"label":"3.2.21","ips":2011.0733990166405,"current":false},{"label":"4.0.13","ips":1759.863318049373,"current":false},{"label":"4.1.9","ips":1423.8581580679038,"current":false},{"label":"4.2.0","ips":1048.4856554300995,"current":false}]],["Resource#update",[{"label":"3.2.21","ips":1402.9294600990052,"current":false},{"label":"4.0.13","ips":1058.3971427774252,"current":false},{"label":"4.1.9","ips":1245.9942457904845,"current":false},{"label":"4.2.0","ips":1019.3441819557407,"current":false}]],["Model.transaction",[{"label":"3.2.21","ips":11447.440690185947,"current":false},{"label":"4.0.13","ips":9787.559729963783,"current":false},{"label":"4.1.9","ips":9822.858203125877,"current":false},{"label":"4.2.0","ips":10245.322882410977,"current":false}]],["Model.find(id)",[{"label":"3.2.21","ips":5760.619862615137,"current":false},{"label":"4.0.13","ips":5120.093199206333,"current":false},{"label":"4.1.9","ips":4314.923864854827,"current":false},{"label":"4.2.0","ips":12468.429248151462,"current":false}]],["Model.find_by_sql",[{"label":"3.2.21","ips":11103.79830091216,"current":false},{"label":"4.0.13","ips":10304.376112010663,"current":false},{"label":"4.1.9","ips":10841.295311080357,"current":false},{"label":"4.2.0","ips":9806.543183340405,"current":false}]]]</template>
+      </div>
+
+      
+      <div class="js-charts-container">
+        <h1><a target="_blank" href="https://github.com/kirs/railsperf-standalone/blob/master/benchmarks/router.rb">router</a></h1>
+        <template class="js-benchmarks-data">[["root route",[{"label":"3.2.21","ips":923.3364967253746,"current":false},{"label":"4.0.13","ips":1146.5664744633093,"current":false},{"label":"4.1.9","ips":1213.2658247022723,"current":false},{"label":"4.2.0","ips":1590.7390639155856,"current":false}]],["3rd level nested resource #index",[{"label":"3.2.21","ips":892.8025024724752,"current":false},{"label":"4.0.13","ips":999.5534542839505,"current":false},{"label":"4.1.9","ips":1063.785662467568,"current":false},{"label":"4.2.0","ips":1403.4508023209398,"current":false}]],["3rd level nested resource #show",[{"label":"3.2.21","ips":819.6242188008779,"current":false},{"label":"4.0.13","ips":950.3334957079087,"current":false},{"label":"4.1.9","ips":890.3686380922945,"current":false},{"label":"4.2.0","ips":1398.289849926755,"current":false}]],["route with inline redirect",[{"label":"3.2.21","ips":1613.6580129618653,"current":false},{"label":"4.0.13","ips":2136.8781463804453,"current":false},{"label":"4.1.9","ips":2016.177670729751,"current":false},{"label":"4.2.0","ips":3021.2705194544847,"current":false}]],["match with POST",[{"label":"3.2.21","ips":1009.7075079500991,"current":false},{"label":"4.0.13","ips":1407.0602701257862,"current":false},{"label":"4.1.9","ips":1220.1143165922736,"current":false},{"label":"4.2.0","ips":1528.5914269165162,"current":false}]],["match with GET",[{"label":"3.2.21","ips":821.3227686481614,"current":false},{"label":"4.0.13","ips":1076.7630632148916,"current":false},{"label":"4.1.9","ips":823.3109951123151,"current":false},{"label":"4.2.0","ips":1347.4141854132445,"current":false}]]]</template>
+      </div>
+
+      
+      <div class="js-charts-container">
+        <h1><a target="_blank" href="https://github.com/kirs/railsperf-standalone/blob/master/benchmarks/partials.rb">partials</a></h1>
+        <template class="js-benchmarks-data">[["render nested partials",[{"label":"3.2.21","ips":1.4593465525947762,"current":false},{"label":"4.0.13","ips":1.4556340673718573,"current":false},{"label":"4.1.9","ips":1.5341589433838454,"current":false},{"label":"4.2.0","ips":1.7990348100368851,"current":false}]]]</template>
+      </div>
+
+      
     </div>
   </div>
 

@@ -52,6 +52,15 @@ class Renderer
     @rubies = rubies
   end
 
+  def link_to_benchmark(code)
+    file = code.sub(".json", "")
+    "https://github.com/kirs/railsperf-standalone/blob/master/benchmarks/#{file}.rb"
+  end
+
+  def humanize(code)
+    code.sub(".json", "")
+  end
+
   def build
     b = binding
     # create and run templates, filling member data variables
