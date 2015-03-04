@@ -1,0 +1,95 @@
+{
+  "ruby": "2.2.0",
+  "benchmarks": [
+    {
+      "component": "actionpack/url_generation",
+      "version": "4.0.13",
+      "entries": [
+        {
+          "label": "redirect route",
+          "iterations": 11376,
+          "ips": 10963.476295143008,
+          "ips_sd": 2258
+        },
+        {
+          "label": "constraints & matched routes",
+          "iterations": 4260,
+          "ips": 4182.210249430775,
+          "ips_sd": 322
+        },
+        {
+          "label": "url_for",
+          "iterations": 3650,
+          "ips": 3608.7441817884473,
+          "ips_sd": 111
+        },
+        {
+          "label": "REST routes",
+          "iterations": 1188,
+          "ips": 1118.1346326908567,
+          "ips_sd": 60
+        }
+      ]
+    },
+    {
+      "component": "actionpack/url_generation",
+      "version": "4.1.9",
+      "entries": [
+        {
+          "label": "redirect route",
+          "iterations": 13560,
+          "ips": 13294.516744484694,
+          "ips_sd": 918
+        },
+        {
+          "label": "constraints & matched routes",
+          "iterations": 4944,
+          "ips": 4761.910965831844,
+          "ips_sd": 425
+        },
+        {
+          "label": "url_for",
+          "iterations": 3852,
+          "ips": 3607.1217607259946,
+          "ips_sd": 241
+        },
+        {
+          "label": "REST routes",
+          "iterations": 1166,
+          "ips": 1151.8364572565997,
+          "ips_sd": 57
+        }
+      ]
+    },
+    {
+      "component": "actionpack/url_generation",
+      "version": "4.2.0",
+      "entries": [
+        {
+          "label": "redirect route",
+          "iterations": 21156,
+          "ips": 19793.244302429423,
+          "ips_sd": 1113
+        },
+        {
+          "label": "constraints & matched routes",
+          "iterations": 6743,
+          "ips": 6455.02331166454,
+          "ips_sd": 365
+        },
+        {
+          "label": "url_for",
+          "iterations": 4400,
+          "ips": 4177.634919908144,
+          "ips_sd": 190
+        },
+        {
+          "label": "REST routes",
+          "iterations": 1944,
+          "ips": 1843.6198885106157,
+          "ips_sd": 91
+        }
+      ]
+    }
+  ]
+}
