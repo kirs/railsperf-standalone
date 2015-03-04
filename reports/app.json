@@ -3,13 +3,25 @@
   "benchmarks": [
     {
       "component": "app",
+      "version": "3.2.21",
+      "entries": [
+        {
+          "label": "app with comments and posts",
+          "iterations": 159,
+          "ips": 31.66050399343618,
+          "ips_sd": 1
+        }
+      ]
+    },
+    {
+      "component": "app",
       "version": "4.0.13",
       "entries": [
         {
           "label": "app with comments and posts",
-          "iterations": 37,
-          "ips": 7.246500387196288,
-          "ips_sd": 0
+          "iterations": 159,
+          "ips": 31.435073128783472,
+          "ips_sd": 1
         }
       ]
     },
@@ -19,8 +31,8 @@
       "entries": [
         {
           "label": "app with comments and posts",
-          "iterations": 32,
-          "ips": 6.380592464890243,
+          "iterations": 152,
+          "ips": 30.321427123074812,
           "ips_sd": 1
         }
       ]
@@ -31,9 +43,9 @@
       "entries": [
         {
           "label": "app with comments and posts",
-          "iterations": 15,
-          "ips": 2.9545931370445566,
-          "ips_sd": 0
+          "iterations": 177,
+          "ips": 35.181868080116004,
+          "ips_sd": 2
         }
       ]
     }

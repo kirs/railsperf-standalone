@@ -2,6 +2,7 @@ require 'bundler/setup'
 
 require 'benchmark/ips'
 require 'json'
+require 'stackprof'
 
 require 'rails'
 require 'action_controller/railtie'
@@ -22,7 +23,7 @@ end
 class BenchmarkApp < Rails::Application
   config.secret_token = "s"*30
   config.secret_key_base = 'foo'
-  config.consider_all_requests_local = true
+  config.consider_all_requests_local = false
 
   # simulate production
   config.cache_classes = true
@@ -33,8 +34,10 @@ class BenchmarkApp < Rails::Application
   config.middleware.delete "Rack::Lock"
 
   # to disable log files
-  # config.logger = NullLoger.new
+  config.logger = NullLoger.new
   config.active_support.deprecation = :log
+
+  config.autoflush_log = false
 end
 
 ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: ':memory:')
@@ -300,37 +303,40 @@ def request(method, path, query_string: "", body: {})
   response
 end
 
-report = Benchmark.ips(TIME, quiet: true) do |x|
-  x.report("app with comments and posts") do
-    request(:get, "/posts")
-    2.times do
-      request(:get, "/posts/new")
-      request(:post, "/posts", body: { post: { title: Faker::Food.herb_or_spice, body: Faker::HipsterIpsum.words(50).join(" "), author: Faker::Name.name }})
-    end
 
-    Post.all.each do |post|
-      post_path = "/posts/#{post.id}"
-      request(:get, post_path)
-      request(:post, "#{post_path}/comments", body: {
-        comment: {
-          body: Faker::HipsterIpsum.words(50).join(" "),
-          email: Faker::Internet.email,
-          author: Faker::Name.name
-        }
-      })
-      if Comment.count.zero?
-        raise "comment not inserted"
+# StackProf.run(mode: :cpu, out: "/tmp/stackprof-app-#{Rails.version.to_s}.dump") do
+  report = Benchmark.ips(TIME, quiet: true) do |x|
+    x.report("app with comments and posts") do
+      request(:get, "/posts")
+      2.times do
+        request(:get, "/posts/new")
+        request(:post, "/posts", body: { post: { title: Faker::Food.herb_or_spice, body: Faker::HipsterIpsum.words(50).join(" "), author: Faker::Name.name }})
       end
 
-      request(:get, post_path)
-      request(:delete, post_path)
-      begin
+      Post.all.each do |post|
+        post_path = "/posts/#{post.id}"
         request(:get, post_path)
-      rescue RouteNotFoundError
+        request(:post, "#{post_path}/comments", body: {
+          comment: {
+            body: Faker::HipsterIpsum.words(50).join(" "),
+            email: Faker::Internet.email,
+            author: Faker::Name.name
+          }
+        })
+        if Comment.count.zero?
+          raise "comment not inserted"
+        end
+
+        request(:get, post_path)
+        request(:delete, post_path)
+        begin
+          request(:get, post_path)
+        rescue RouteNotFoundError
+        end
       end
     end
   end
-end
+# end
 
 stats = {
   component: :app,

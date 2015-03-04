@@ -56,7 +56,7 @@ class BenchmarkApp < Rails::Application
   end
   config.secret_token = "s"*30
   config.secret_key_base = 'foo'
-  config.consider_all_requests_local = true
+  config.consider_all_requests_local = false
 
   # simulate production
   config.cache_classes = true
