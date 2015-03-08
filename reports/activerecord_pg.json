@@ -1,0 +1,269 @@
+{
+  "ruby": "2.2.0",
+  "benchmarks": [
+    {
+      "component": "active_record",
+      "version": "3.2.21",
+      "entries": [
+        {
+          "label": "Model.new (instantiation)",
+          "iterations": 175960,
+          "ips": 36260.13314313917,
+          "ips_sd": 5738
+        },
+        {
+          "label": "Model.new (setting attributes)",
+          "iterations": 91637,
+          "ips": 18110.53899091654,
+          "ips_sd": 1255
+        },
+        {
+          "label": "Model.first",
+          "iterations": 11934,
+          "ips": 2407.979781511411,
+          "ips_sd": 286
+        },
+        {
+          "label": "Model.all limit(100)",
+          "iterations": 323,
+          "ips": 62.77112676886834,
+          "ips_sd": 9
+        },
+        {
+          "label": "Model.all first(100)",
+          "iterations": 323,
+          "ips": 65.35815972046862,
+          "ips_sd": 7
+        },
+        {
+          "label": "Model.all limit(10,000)",
+          "iterations": 36,
+          "ips": 5.79878467099253,
+          "ips_sd": 0
+        },
+        {
+          "label": "Model.named_scope",
+          "iterations": 78900,
+          "ips": 15749.332841875783,
+          "ips_sd": 1279
+        },
+        {
+          "label": "Model.create",
+          "iterations": 4526,
+          "ips": 958.47500017289,
+          "ips_sd": 191
+        },
+        {
+          "label": "Resource#update",
+          "iterations": 4816,
+          "ips": 966.2050434573255,
+          "ips_sd": 79
+        },
+        {
+          "label": "Model.find(id)",
+          "iterations": 17667,
+          "ips": 3531.201785908907,
+          "ips_sd": 272
+        }
+      ]
+    },
+    {
+      "component": "active_record",
+      "version": "4.0.13",
+      "entries": [
+        {
+          "label": "Model.new (instantiation)",
+          "iterations": 208896,
+          "ips": 41220.36473124477,
+          "ips_sd": 1494
+        },
+        {
+          "label": "Model.new (setting attributes)",
+          "iterations": 124980,
+          "ips": 24806.401723245097,
+          "ips_sd": 958
+        },
+        {
+          "label": "Model.first",
+          "iterations": 14560,
+          "ips": 2882.2577874849885,
+          "ips_sd": 184
+        },
+        {
+          "label": "Model.all limit(100)",
+          "iterations": 594,
+          "ips": 117.38297473042074,
+          "ips_sd": 4
+        },
+        {
+          "label": "Model.all first(100)",
+          "iterations": 594,
+          "ips": 117.27487472629208,
+          "ips_sd": 3
+        },
+        {
+          "label": "Model.all limit(10,000)",
+          "iterations": 46,
+          "ips": 5.965604074553106,
+          "ips_sd": 0
+        },
+        {
+          "label": "Model.named_scope",
+          "iterations": 73245,
+          "ips": 14568.523957369986,
+          "ips_sd": 790
+        },
+        {
+          "label": "Model.create",
+          "iterations": 4400,
+          "ips": 924.5407538314753,
+          "ips_sd": 215
+        },
+        {
+          "label": "Resource#update",
+          "iterations": 3872,
+          "ips": 789.3981921224314,
+          "ips_sd": 151
+        },
+        {
+          "label": "Model.find(id)",
+          "iterations": 16128,
+          "ips": 3264.1063813076094,
+          "ips_sd": 372
+        }
+      ]
+    },
+    {
+      "component": "active_record",
+      "version": "4.1.9",
+      "entries": [
+        {
+          "label": "Model.new (instantiation)",
+          "iterations": 197888,
+          "ips": 39598.12926943425,
+          "ips_sd": 1968
+        },
+        {
+          "label": "Model.new (setting attributes)",
+          "iterations": 105400,
+          "ips": 20979.67821401989,
+          "ips_sd": 892
+        },
+        {
+          "label": "Model.first",
+          "iterations": 13452,
+          "ips": 2692.413043564966,
+          "ips_sd": 135
+        },
+        {
+          "label": "Model.all limit(100)",
+          "iterations": 672,
+          "ips": 133.4217402141351,
+          "ips_sd": 5
+        },
+        {
+          "label": "Model.all first(100)",
+          "iterations": 660,
+          "ips": 131.93984530927497,
+          "ips_sd": 4
+        },
+        {
+          "label": "Model.all limit(10,000)",
+          "iterations": 72,
+          "ips": 9.960578912604856,
+          "ips_sd": 0
+        },
+        {
+          "label": "Model.named_scope",
+          "iterations": 79794,
+          "ips": 15789.699819157277,
+          "ips_sd": 758
+        },
+        {
+          "label": "Model.create",
+          "iterations": 4550,
+          "ips": 949.4617318167747,
+          "ips_sd": 167
+        },
+        {
+          "label": "Resource#update",
+          "iterations": 4005,
+          "ips": 827.417392487437,
+          "ips_sd": 138
+        },
+        {
+          "label": "Model.find(id)",
+          "iterations": 14904,
+          "ips": 3007.7693275696415,
+          "ips_sd": 358
+        }
+      ]
+    },
+    {
+      "component": "active_record",
+      "version": "4.2.0",
+      "entries": [
+        {
+          "label": "Model.new (instantiation)",
+          "iterations": 365863,
+          "ips": 72650.89127059605,
+          "ips_sd": 2958
+        },
+        {
+          "label": "Model.new (setting attributes)",
+          "iterations": 53928,
+          "ips": 10665.681933973927,
+          "ips_sd": 502
+        },
+        {
+          "label": "Model.first",
+          "iterations": 12648,
+          "ips": 2519.86329221166,
+          "ips_sd": 140
+        },
+        {
+          "label": "Model.all limit(100)",
+          "iterations": 567,
+          "ips": 110.33675970429593,
+          "ips_sd": 3
+        },
+        {
+          "label": "Model.all first(100)",
+          "iterations": 546,
+          "ips": 107.6941754628066,
+          "ips_sd": 4
+        },
+        {
+          "label": "Model.all limit(10,000)",
+          "iterations": 42,
+          "ips": 6.973015936581999,
+          "ips_sd": 0
+        },
+        {
+          "label": "Model.named_scope",
+          "iterations": 79287,
+          "ips": 15849.532349351615,
+          "ips_sd": 848
+        },
+        {
+          "label": "Model.create",
+          "iterations": 4056,
+          "ips": 810.4837858645066,
+          "ips_sd": 75
+        },
+        {
+          "label": "Resource#update",
+          "iterations": 3975,
+          "ips": 784.4512304904374,
+          "ips_sd": 49
+        },
+        {
+          "label": "Model.find(id)",
+          "iterations": 25844,
+          "ips": 5164.579437940361,
+          "ips_sd": 430
+        }
+      ]
+    }
+  ]
+}
