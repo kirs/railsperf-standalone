@@ -152,14 +152,6 @@ report = Benchmark.ips(TIME, quiet: true) do |x|
     end
   end
 
-  x.report 'Resource#destroy' do
-    Exhibit.first.destroy
-  end
-
-  x.report 'Model.transaction' do
-    Exhibit.transaction { Exhibit.new }
-  end
-
   x.report 'Model.find(id)' do
     User.find(1)
   end

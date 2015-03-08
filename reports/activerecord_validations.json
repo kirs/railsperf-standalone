@@ -1,0 +1,77 @@
+{
+  "ruby": "2.2.0",
+  "benchmarks": [
+    {
+      "component": "active_record/validations",
+      "version": "3.2.21",
+      "entries": [
+        {
+          "label": "validating not valid post",
+          "iterations": 2332,
+          "ips": 466.3774215231163,
+          "ips_sd": 19
+        },
+        {
+          "label": "validating valid post",
+          "iterations": 3264,
+          "ips": 650.3219720323586,
+          "ips_sd": 25
+        }
+      ]
+    },
+    {
+      "component": "active_record/validations",
+      "version": "4.0.13",
+      "entries": [
+        {
+          "label": "validating not valid post",
+          "iterations": 2392,
+          "ips": 475.2645819717845,
+          "ips_sd": 18
+        },
+        {
+          "label": "validating valid post",
+          "iterations": 3500,
+          "ips": 697.5630955819983,
+          "ips_sd": 26
+        }
+      ]
+    },
+    {
+      "component": "active_record/validations",
+      "version": "4.1.9",
+      "entries": [
+        {
+          "label": "validating not valid post",
+          "iterations": 2444,
+          "ips": 485.36461121678735,
+          "ips_sd": 20
+        },
+        {
+          "label": "validating valid post",
+          "iterations": 3417,
+          "ips": 678.3640098498711,
+          "ips_sd": 22
+        }
+      ]
+    },
+    {
+      "component": "active_record/validations",
+      "version": "4.2.0",
+      "entries": [
+        {
+          "label": "validating not valid post",
+          "iterations": 2120,
+          "ips": 417.23500792101777,
+          "ips_sd": 16
+        },
+        {
+          "label": "validating valid post",
+          "iterations": 2652,
+          "ips": 523.3756286850617,
+          "ips_sd": 21
+        }
+      ]
+    }
+  ]
+}

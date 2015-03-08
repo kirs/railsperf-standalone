@@ -22,11 +22,10 @@ def format_reports(reports)
     [
       reports.map { |r| r["entries"][i]["label"] }.find(&:present?),
       reports.map { |r|
-        current = !!r["current"]
         {
-          label: current ? "current" : r["version"],
+          label: r["version"],
+          tag: r["tag"],
           ips: r["entries"][i]["ips"],
-          current: current
         }
       }
     ]

@@ -11,10 +11,6 @@
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <script>
 $(function() {
-  var chartData;
-
-
-
   var chartsContainer = $(".js-charts-container");
   if(chartsContainer.length == 0) {
     return;
@@ -22,7 +18,7 @@ $(function() {
 
   chartsContainer.each(function(i, div) {
     var benchmarksData = $(div).find(".js-benchmarks-data")
-    chartData = JSON.parse(benchmarksData.html());
+    var chartData = JSON.parse(benchmarksData.html());
     if(chartData == null) {
       return;
     }
@@ -59,7 +55,15 @@ $(function() {
 
       var data = chartData[i][1]
 
-      x.domain(data.map(function(d) { return d.label; }));
+      var itemIndex = function(d) {
+        if(d.tag) {
+          return d.tag.substring(0,6);
+        } else {
+          return d.label;
+        }
+      };
+
+      x.domain(data.map(itemIndex));
       y.domain([0, d3.max(data, function(d) { return d.ips; })]);
 
       svg.append("g")
@@ -78,19 +82,14 @@ $(function() {
           .text("IPS");
 
       var barClass = function(d) {
-        console.log(d)
-        if(d) {
-          return "bar_current"
-        } else {
-          return "bar"
-        }
+        return "bar"
       };
       var labelFormatter = d3.format(".4f")
       svg.selectAll(".bar")
           .data(data)
         .enter().append("rect")
           .attr("class", function(d) { return barClass(d.current); })
-          .attr("x", function(d) { return x(d.label) + 10; })
+          .attr("x", function(d) { return x(itemIndex(d)) + 10; })
           .attr("width", x.rangeBand() - 20)
           .attr("y", function(d) { return y(d.ips); })
           .attr("height", function(d) { return height - y(d.ips); })
